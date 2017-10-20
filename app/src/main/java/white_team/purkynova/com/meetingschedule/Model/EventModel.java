@@ -16,7 +16,7 @@ import white_team.purkynova.com.meetingschedule.Event.Event;
  * functions from other models. Only this model should be visible out of the package. Other ones
  * should be accessible via this class from the outside.
  */
-final class EventModel extends dbAdapter {
+final class EventModel extends DbAdapter {
     private final String TABLE_NAME = "event";
 
     // Table columns
@@ -50,7 +50,7 @@ final class EventModel extends dbAdapter {
      * =============================================================================================
      * Overriding abstract class
      * ---------------------------------------------------------------------------------------------
-     * These methods are required from parent (dbAdapter). See their documentation for details.
+     * These methods are required from parent (DbAdapter). See their documentation for details.
      * =============================================================================================
      */
 
@@ -95,7 +95,7 @@ final class EventModel extends dbAdapter {
      */
 
     // TODO: write the body of these SQL methods
-    // NOTE: don't forget that you can use methods 'get' and 'delete' from dbAdapter
+    // NOTE: don't forget that you can use methods 'get' and 'delete' from DbAdapter
 
     /**
      * Return event by id

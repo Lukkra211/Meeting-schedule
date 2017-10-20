@@ -13,7 +13,7 @@ import android.util.Log;
 /**
  * This class is a parent to all other models.
  */
-abstract class dbAdapter {
+abstract class DbAdapter {
     private final String DATABASE_NAME = "event_database";
     private final int DATABASE_VERSION = 1;
 
@@ -27,7 +27,7 @@ abstract class dbAdapter {
     protected SQLiteDatabase db;
 
 
-    dbAdapter(Context context) {
+    DbAdapter(Context context) {
         this.CHILD_TABLE_NAME = getTableName();
         this.CHILD_COL_ID = getIdColumnName();
         this.databaseHelper = new DatabaseHelper(context);
@@ -55,7 +55,7 @@ abstract class dbAdapter {
      * =============================================================================================
      * Services for childes
      * ---------------------------------------------------------------------------------------------
-     * Methods below are methods that every class - that inherit from dbAdapter - cat use. This
+     * Methods below are methods that every class - that inherit from DbAdapter - cat use. This
      * should reduce repetitive code in case more database models are needed.
      * =============================================================================================
      */
@@ -147,13 +147,13 @@ abstract class dbAdapter {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            Log.i("dbAdapter", "Creating the database");
+            Log.i("DbAdapter", "Creating the database");
             childOnCreate(db);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.i("dbAdapter", "Upgrading the database");
+            Log.i("DbAdapter", "Upgrading the database");
             childOnUpgrade(db, oldVersion, newVersion);
         }
     }
