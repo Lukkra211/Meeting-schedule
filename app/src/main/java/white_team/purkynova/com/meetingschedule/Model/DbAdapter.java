@@ -13,7 +13,7 @@ import android.util.Log;
 /**
  * This class is a parent to all other models.
  */
-abstract class dbAdapter {
+abstract class DbAdapter {
     private final String DATABASE_NAME = "event_database";
     private final int DATABASE_VERSION = 1;
 
@@ -26,11 +26,15 @@ abstract class dbAdapter {
     /** @brief db object that is used to manipulating data in database */
     protected SQLiteDatabase db;
 
+    /** @brief db object that is used to initialize database or change */
+    protected DbMigration dbMigration;
 
-    dbAdapter(Context context) {
+
+    DbAdapter(Context context) {
         this.CHILD_TABLE_NAME = getTableName();
         this.CHILD_COL_ID = getIdColumnName();
         this.databaseHelper = new DatabaseHelper(context);
+        this.dbMigration = new DbMigration();
     }
 
 
@@ -55,7 +59,7 @@ abstract class dbAdapter {
      * =============================================================================================
      * Services for childes
      * ---------------------------------------------------------------------------------------------
-     * Methods below are methods that every class - that inherit from dbAdapter - cat use. This
+     * Methods below are methods that every class - that inherit from DbAdapter - cat use. This
      * should reduce repetitive code in case more database models are needed.
      * =============================================================================================
      */
@@ -117,24 +121,9 @@ abstract class dbAdapter {
 
 	/*
      * =============================================================================================
-     * Abstract callbacks
-     * ---------------------------------------------------------------------------------------------
-     * These methods are called when some operations on database scheme needs to be done first.
+     * Database migration callbacks
      * =============================================================================================
      */
-
-    /**
-     * This method is triggered when database hasn't been created yet. The method should create all
-     * necessary tables and insert vital information in it.
-     */
-    abstract void childOnCreate(SQLiteDatabase db);
-
-    /**
-     * This method is triggered when app is using new database model but device has the old one. The
-     * method should do changes that upgrade old database model to the new one.
-     */
-    abstract void childOnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);
-
 
 	/**
 	 * A class that call abstract methods as callbacks when database is not present and needs to be
@@ -145,16 +134,26 @@ abstract class dbAdapter {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
+        /**
+         * This method is triggered when database hasn't been created yet. The method should create all
+         * necessary tables and insert vital information in it.
+         *
+         * @param db the database to initialize
+         */
         @Override
         public void onCreate(SQLiteDatabase db) {
-            Log.i("dbAdapter", "Creating the database");
-            childOnCreate(db);
+            Log.i("DbAdapter", "Creating the database");
+            dbMigration.onCreate(db);
         }
 
+        /**
+         * This method is triggered when app is using new database model but device has the old one. The
+         * method should do changes that upgrade old database model to the new one.
+         */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.i("dbAdapter", "Upgrading the database");
-            childOnUpgrade(db, oldVersion, newVersion);
+            Log.i("DbAdapter", "Upgrading the database");
+            dbMigration.onUpgrade(db, oldVersion, newVersion);
         }
     }
 }
