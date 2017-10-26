@@ -24,9 +24,6 @@ abstract class DbAdapter {
     /** @brief db object that is used to manipulating data in database */
     protected SQLiteDatabase db;
 
-    /** @brief db object that is used to initialize database or change */
-    protected DbMigration dbMigration;
-
     private final String SEARCH_QUERY = "SELECT * FROM `%s` WHERE %s = ?";
 
 
@@ -34,7 +31,6 @@ abstract class DbAdapter {
         this.CHILD_TABLE_NAME = getTableName();
         this.CHILD_COL_ID = getIdColumnName();
         this.databaseHelper = new DatabaseHelper(context);
-        this.dbMigration = new DbMigration();
     }
 
 
@@ -134,6 +130,7 @@ abstract class DbAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             Log.i("DbAdapter", "Creating the database");
+            DbMigration dbMigration = new DbMigration();
             dbMigration.onCreate(db);
         }
 
@@ -144,6 +141,7 @@ abstract class DbAdapter {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.i("DbAdapter", "Upgrading the database");
+            DbMigration dbMigration = new DbMigration();
             dbMigration.onUpgrade(db, oldVersion, newVersion);
         }
     }
