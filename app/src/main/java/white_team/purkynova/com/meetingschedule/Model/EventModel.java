@@ -15,23 +15,23 @@ import white_team.purkynova.com.meetingschedule.Event.Event;
  * @author Lukáš Krajíček
  */
 public final class EventModel extends DbAdapter {
-    private static final String TABLE_NAME = "event";
+    static final String TABLE_NAME = "event";
 
     // Table columns
-    private static final String COL_ID = "id";
-    private static final String COL_NAME = "name";
-    private static final String COL_TYPE = "type";
-    private static final String COL_PLACE = "place";
-    private static final String COL_SINCE = "since";
-    private static final String COL_TILL = "till";
-    private static final String COL_INFO = "text_info";
-    private static final String COL_LECTURER = "lecturer";
+    static final String COL_ID = "id";
+    static final String COL_NAME = "name";
+    static final String COL_TYPE = "type";
+    static final String COL_PLACE = "place";
+    static final String COL_SINCE = "since";
+    static final String COL_TILL = "till";
+    static final String COL_INFO = "text_info";
+    static final String COL_LECTURER = "lecturer";
 
     // String to identify this class in log
     static final String TAG = "EventModel";
     static final String TABLE_CREATE = String.format(
             "CREATE TABLE if not exists `%s` (" +
-            "`%s` INTEGER PRIMARY KEY AUTO_INCREMENT, " +
+            "`%s` INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "`%s` INTEGER NOT NULL," +
             "`%s` TEXT NOT NULL," +
             "`%s` TEXT NOT NULL, " +
@@ -43,7 +43,7 @@ public final class EventModel extends DbAdapter {
             COL_SINCE, COL_TILL, COL_INFO, COL_LECTURER
     );
 
-    EventModel(Context context) {
+    public EventModel(Context context) {
         super(context);
         dbOpen();
     }
