@@ -1,11 +1,9 @@
-
 package white_team.purkynova.com.meetingschedule.Model;
 
-/**
- * Created by Lukáš Krajíček on 15.10.17.
- */
-
 import android.content.Context;
+import android.database.Cursor;
+
+import java.util.ArrayList;
 
 import white_team.purkynova.com.meetingschedule.Event.Event;
 
@@ -13,32 +11,39 @@ import white_team.purkynova.com.meetingschedule.Event.Event;
  * Main database model. This have to call other "childOnCreate" and "childOnUpgrade"
  * functions from other models. Only this model should be visible out of the package. Other ones
  * should be accessible via this class from the outside.
+ *
+ * @author Lukáš Krajíček
  */
-final class EventModel extends DbAdapter {
+public final class EventModel extends DbAdapter {
     static final String TABLE_NAME = "event";
 
     // Table columns
     static final String COL_ID = "id";
     static final String COL_NAME = "name";
     static final String COL_TYPE = "type";
+    static final String COL_PLACE = "place";
     static final String COL_SINCE = "since";
     static final String COL_TILL = "till";
     static final String COL_INFO = "text_info";
+    static final String COL_LECTURER = "lecturer";
 
     // String to identify this class in log
     static final String TAG = "EventModel";
     static final String TABLE_CREATE = String.format(
             "CREATE TABLE if not exists `%s` (" +
-            "`%s` INTEGER PRIMARY KEY, " +
+            "`%s` INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "`%s` INTEGER NOT NULL," +
+            "`%s` TEXT NOT NULL," +
             "`%s` TEXT NOT NULL, " +
-            "`%s` TEXT NOT NULL, ",
-            "`%s` TEXT NOT NULL, ",
-            "`%s` TEXT NOT NULL);",
-            TABLE_NAME, COL_ID, COL_TYPE, COL_NAME, COL_SINCE, COL_TILL, COL_INFO
+            "`%s` TEXT NOT NULL, " +
+            "`%s` TEXT NOT NULL, " +
+            "`%s` TEXT NOT NULL, " +
+            "`%s` TEXT DEFAULT NULL);",
+            TABLE_NAME, COL_ID, COL_TYPE, COL_PLACE, COL_NAME,
+            COL_SINCE, COL_TILL, COL_INFO, COL_LECTURER
     );
 
-    EventModel(Context context) {
+    public EventModel(Context context) {
         super(context);
         dbOpen();
     }
@@ -54,14 +59,12 @@ final class EventModel extends DbAdapter {
 
     @Override
     String getIdColumnName() {
-        // TODO: write method
-        return "";
+        return COL_ID;
     }
 
     @Override
     String getTableName() {
-        // TODO: write method
-        return "";
+        return TABLE_NAME;
     }
 
     /*
@@ -74,9 +77,6 @@ final class EventModel extends DbAdapter {
      * =============================================================================================
      */
 
-    // TODO: write the body of these SQL methods
-    // NOTE: don't forget that you can use methods 'get' and 'delete' from DbAdapter
-
     /**
      * Return event by id
      *
@@ -84,8 +84,12 @@ final class EventModel extends DbAdapter {
      * @return {@link Event}
      */
     public Event get(int id) {
-        // TODO: write method
-        return null;
+        Cursor rows = super._get(id);
+        if (rows.moveToFirst()) {
+            return this._createEventFromCursor(rows);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -94,30 +98,46 @@ final class EventModel extends DbAdapter {
      * @param date given date by ISO 8601 standart: YYYY-MM-DD
      * @return the number of rows affected
      */
-    public Event getEventsByDate(String date) {
-        // TODO: write method
-        return null;
+    public ArrayList<Event> getEventsByDate(String date) {
+        Cursor rows = this.db.rawQuery(
+                String.format("SELECT * from `%s` WHERE %s LIKE ?", TABLE_NAME, COL_SINCE),
+                new String[] {date}
+        );
+
+        if (rows.moveToFirst()) {
+            ArrayList<Event> eventList = new ArrayList<>();
+            do {
+                eventList.add(this._createEventFromCursor(rows));
+            } while (rows.moveToNext());
+
+            return eventList;
+        } else {
+            return null;
+        }
     }
 
     /**
-     * Insert one event to the database
+     * Create Event object from given Cursor object
      *
-     * @param event event to insert
-     * @return int the number of events inserted (should be 1)
+     * Cursor object have to be already moved to some row
+     * @param cursor Cursor object
+     * @return Event object
      */
-    public int insertEvent(Event event) {
-        // TODO: write method
-        return 0;
-    }
+    private Event _createEventFromCursor(Cursor cursor) {
+        int index_since = cursor.getColumnIndex(EventModel.COL_SINCE);
+        int index_till = cursor.getColumnIndex(EventModel.COL_TILL);
+        int index_type = cursor.getColumnIndex(EventModel.COL_TYPE);
+        int index_place = cursor.getColumnIndex(EventModel.COL_PLACE);
+        int index_info = cursor.getColumnIndex(EventModel.COL_INFO);
+        int index_lecturer = cursor.getColumnIndex(EventModel.COL_LECTURER);
 
-    /**
-     * Insert events to the database
-     *
-     * @param events list of events to be inserted
-     * @return int the number of events inserted
-     */
-    public int insertEvents(Event[] events) {
-        // TODO: write method
-        return 0;
+        return new Event(
+                cursor.getString(index_since),
+                cursor.getString(index_till),
+                cursor.getString(index_type),
+                cursor.getString(index_place),
+                cursor.getString(index_info),
+                cursor.getString(index_lecturer)
+        );
     }
 }
