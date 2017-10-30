@@ -3,6 +3,7 @@ package white_team.purkynova.com.meetingschedule.Model;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import white_team.purkynova.com.meetingschedule.Event.Event;
@@ -82,8 +83,9 @@ public final class EventModel extends DbAdapter {
      *
      * @param id id of an event
      * @return {@link Event}
+     * @throws ParseException
      */
-    public Event get(int id) {
+    public Event get(int id) throws ParseException {
         Cursor rows = super._get(id);
         if (rows.moveToFirst()) {
             return this._createEventFromCursor(rows);
@@ -107,7 +109,11 @@ public final class EventModel extends DbAdapter {
         if (rows.moveToFirst()) {
             ArrayList<Event> eventList = new ArrayList<>();
             do {
-                eventList.add(this._createEventFromCursor(rows));
+                try {
+                    eventList.add(this._createEventFromCursor(rows));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             } while (rows.moveToNext());
 
             return eventList;
@@ -123,7 +129,8 @@ public final class EventModel extends DbAdapter {
      * @param cursor Cursor object
      * @return Event object
      */
-    private Event _createEventFromCursor(Cursor cursor) {
+    private Event _createEventFromCursor(Cursor cursor) throws ParseException {
+        int index_name = cursor.getColumnIndex(EventModel.COL_NAME);
         int index_since = cursor.getColumnIndex(EventModel.COL_SINCE);
         int index_till = cursor.getColumnIndex(EventModel.COL_TILL);
         int index_type = cursor.getColumnIndex(EventModel.COL_TYPE);
@@ -132,6 +139,7 @@ public final class EventModel extends DbAdapter {
         int index_lecturer = cursor.getColumnIndex(EventModel.COL_LECTURER);
 
         return new Event(
+                cursor.getString(index_name),
                 cursor.getString(index_since),
                 cursor.getString(index_till),
                 cursor.getString(index_type),
