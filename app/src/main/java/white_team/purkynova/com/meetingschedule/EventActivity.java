@@ -1,5 +1,6 @@
 package white_team.purkynova.com.meetingschedule;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ public class EventActivity extends AppCompatActivity {
     TextView pleace ;
     TextView time;
     TextView text;
+    TextView lecture;
+    TextView isLecture;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,8 @@ public class EventActivity extends AppCompatActivity {
         pleace = (TextView) findViewById(R.id.textView2);
         time = (TextView) findViewById(R.id.textView3);
         text = (TextView) findViewById(R.id.textView);
+        lecture= (TextView) findViewById(R.id.textView4);
+        isLecture = (TextView) findViewById(R.id.textView5);
         eventModel = new EventModel(this);
 
         Bundle extras = getIntent().getExtras();
@@ -38,6 +44,14 @@ public class EventActivity extends AppCompatActivity {
                     pleace.setText(event.getName());
                     time.setText(event.getTimeSpan());
                     text.setText(event.getDescription());
+                    if(event.isLecture()){
+                        isLecture.setText("Lecture: YES");
+                        lecture.setText(event.getLecturer());
+                    }else {
+                        isLecture.setText("");
+                        lecture.setText("");
+                    }
+
                 }
 
 
