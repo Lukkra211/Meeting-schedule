@@ -6,6 +6,8 @@
     <string name="feedback">FeedBack</string>
     <string name="materilas">materilas</string>
     <string name="todo">TODO</string>
+    <string name="lecturer">Lecturer</string>
+    <string name="islecturer">isLecturer?</string>
 
     <array name="spinnerType">
         <item>Day</item>

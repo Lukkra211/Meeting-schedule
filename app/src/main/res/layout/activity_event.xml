@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/time_start_end"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:ignore="MissingConstraints" />
@@ -24,6 +25,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="1dp"
         android:text="@string/text_end"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +36,11 @@
         android:id="@+id/textView3"
         android:layout_width="61dp"
         android:layout_height="17dp"
-
         android:layout_marginTop="16dp"
         android:text="@string/pleace"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="99dp" />
 
     <Button
@@ -82,7 +85,8 @@
         android:layout_width="102dp"
         android:layout_height="18dp"
         android:layout_marginStart="32dp"
-        android:text="Lecturer"
+        android:text="@string/lecturer"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -91,7 +95,8 @@
         android:layout_width="129dp"
         android:layout_height="21dp"
         android:layout_marginStart="32dp"
-        android:text="isLecturer? "
+        android:text="@string/islecturer"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
