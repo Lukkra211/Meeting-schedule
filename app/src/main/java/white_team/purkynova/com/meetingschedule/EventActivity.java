@@ -23,9 +23,9 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        pleace = (TextView) findViewById(R.id.textView);
-        time = (TextView) findViewById(R.id.textView2);
-        text = (TextView) findViewById(R.id.textView3);
+        pleace = (TextView) findViewById(R.id.textView2);
+        time = (TextView) findViewById(R.id.textView3);
+        text = (TextView) findViewById(R.id.textView);
         eventModel = new EventModel(this);
 
         Bundle extras = getIntent().getExtras();
@@ -35,7 +35,9 @@ public class EventActivity extends AppCompatActivity {
             if (Value > 0) {
                 Event event = this.eventModel.get(Value);
                 if (event != null) {
-                    Log.i("test", event.getName());
+                    pleace.setText(event.getName());
+                    time.setText(event.getTimeSpan());
+                    text.setText(event.getDescription());
                 }
 
 

@@ -88,4 +88,8 @@ public class Event {
     public String getDescription(){
         return this.description;
     }
+
+    public String getName() {
+        return name;
+    }
 }
