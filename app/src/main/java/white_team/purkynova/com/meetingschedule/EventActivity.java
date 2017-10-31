@@ -24,6 +24,7 @@ public class EventActivity extends AppCompatActivity {
     TextView isLecture;
 
 
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
