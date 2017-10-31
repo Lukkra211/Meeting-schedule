@@ -36,12 +36,13 @@
         android:id="@+id/textView3"
         android:layout_width="61dp"
         android:layout_height="17dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/pleace"
         android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="99dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button"

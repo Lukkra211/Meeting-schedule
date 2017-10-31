@@ -1,11 +1,13 @@
 package white_team.purkynova.com.meetingschedule;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,6 +36,8 @@ public class EventActivity extends AppCompatActivity {
         isLecture = (TextView) findViewById(R.id.textView5);
         eventModel = new EventModel(this);
 
+
+
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -53,24 +57,6 @@ public class EventActivity extends AppCompatActivity {
                     }
 
                 }
-
-
-                String nam = "U69";
-                String phon = "16.00-17.00";
-                String emai = "sogjsrohzjgerihrtsighrtuihrtuhgrůuhgjsrůgjrosůjgorjtsghůrtsjhghůsrtjhůsrtdjh";
-                pleace.setText((CharSequence) phon);
-                   /* pleace.setFocusable(false);
-                    pleace.setClickable(false);*/
-
-                time.setText((CharSequence) emai);
-                   /* time.setFocusable(false);
-                    time.setClickable(false);*/
-
-                text.setText((CharSequence) nam);
-                   /* text.setFocusable(false);
-                    text.setClickable(false);*/
-
-
             }
         }
 
@@ -85,5 +71,11 @@ public class EventActivity extends AppCompatActivity {
         Uri urif = Uri.parse("http://www.sspbrno.cz/"); // open feedback found url for feedbacka
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
+    }
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), OverviewActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+
     }
 }
