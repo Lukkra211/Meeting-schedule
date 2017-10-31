@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import white_team.purkynova.com.meetingschedule.Model.EventModel;
+
 /**
  * @author Zdeňka Škrdlová
  */
@@ -14,6 +16,8 @@ public class OverviewActivity extends AppCompatActivity implements AdapterView.O
 
     private Spinner spinner;
     private Intent intent;
+
+    private EventModel eventModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class OverviewActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void initParams() {
+        this.eventModel = new EventModel(this);
+
         intent = new Intent(this, EventActivity.class);
         // TODO: doplnit id po vytvoreni XML
         //spinner = (Spinner) findViewById(0);

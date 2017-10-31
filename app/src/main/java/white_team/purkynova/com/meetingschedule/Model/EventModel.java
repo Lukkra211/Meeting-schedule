@@ -85,10 +85,15 @@ public final class EventModel extends DbAdapter {
      * @return {@link Event}
      * @throws ParseException
      */
-    public Event get(int id) throws ParseException {
+    public Event get(int id) {
         Cursor rows = super._get(id);
         if (rows.moveToFirst()) {
-            return this._createEventFromCursor(rows);
+            try {
+                return this._createEventFromCursor(rows);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
         } else {
             return null;
         }
@@ -143,8 +148,8 @@ public final class EventModel extends DbAdapter {
                 cursor.getString(index_since),
                 cursor.getString(index_till),
                 cursor.getString(index_type),
-                cursor.getString(index_place),
                 cursor.getString(index_info),
+                cursor.getString(index_place),
                 cursor.getString(index_lecturer)
         );
     }
