@@ -30,9 +30,9 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        pleace = (TextView) findViewById(R.id.textView2);
-        time = (TextView) findViewById(R.id.textView3);
-        text = (TextView) findViewById(R.id.textView);
+        pleace = (TextView) findViewById(R.id.textView3);
+        time = (TextView) findViewById(R.id.textView);
+        text = (TextView) findViewById(R.id.textView2);
         lecture= (TextView) findViewById(R.id.textView4);
         isLecture = (TextView) findViewById(R.id.textView5);
         eventModel = new EventModel(this);
