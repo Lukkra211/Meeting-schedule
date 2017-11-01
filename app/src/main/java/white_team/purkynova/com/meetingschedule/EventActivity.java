@@ -5,9 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 import white_team.purkynova.com.meetingschedule.Event.Event;
 import white_team.purkynova.com.meetingschedule.Model.EventModel;
@@ -80,7 +81,6 @@ public class EventActivity extends AppCompatActivity {
      */
     private void initUI() {
         if(this.event.getType()=="food"){
-            Log.e(TAG, String.format("FOOD"));
             this.textViewNameAndType.setText(getString(R.string.name_and_type,
                     this.event.getName(),
                     this.event.getType()));
@@ -90,21 +90,20 @@ public class EventActivity extends AppCompatActivity {
 
 
             String food1 = getString(R.string.description, this.event.getDescription());
-            String food= "1)"+food1;
-            String semicolon=";";
-            Log.e(TAG, String.format("1",food));
-            for (char c : food.toCharArray()) {
-                Log.e(TAG, String.format("2",c));
-                if (semicolon.contains(String.valueOf(c))) {
-                    Log.e(TAG, String.format("3",c));
-                }
-
+            String[] parts = food1.split(";");
+            String[] foods=new String[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                String foodNoNumber = parts[i];
+                String foodYesNumber = "\n"+String.valueOf(i+1)+")"+foodNoNumber;
+                foods[i]=foodYesNumber;
             }
+            String str = Arrays.toString(foods);
+            String cleanfood=str.replaceAll("^\\[|\\]$", "");
 
 
+            this.textViewDescription.setText(cleanfood);
 
 
-            this.textViewDescription.setText(food);
         }else{
         this.textViewNameAndType.setText(getString(R.string.name_and_type,
                                                    this.event.getName(),
@@ -126,5 +125,8 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
     }
-
+    public static String replaceChar(String str, String target){
+        String result = str.replaceAll(target, "\n");
+        return result;
+    }
 }
