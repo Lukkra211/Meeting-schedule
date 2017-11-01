@@ -57,11 +57,11 @@ public class EventActivity extends AppCompatActivity {
         this.textViewDescription = (TextView) findViewById(R.id.eventDescription);
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+        if (extras == null) {
             Log.e(TAG, "Activity didn't get id of the event.");
         } else {
             try {
-                int id = 8;//extras.getInt("id");
+                int id = extras.getInt("id");
                 this.event = this.eventModel.get(id);
 
                 if (this.event == null) {
