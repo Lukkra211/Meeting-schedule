@@ -90,6 +90,8 @@ public class EventActivity extends AppCompatActivity {
 
             if(this.event.getGuarantor()==null){
                 textViewGuarantor.setVisibility(View.INVISIBLE);
+            }else{
+                this.textViewGuarantor.setText(getString(R.string.guarantor, this.event.getGuarantor()));
             }
 
             String food1 = getString(R.string.description, this.event.getDescription());
@@ -113,7 +115,9 @@ public class EventActivity extends AppCompatActivity {
         this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
         if(this.event.getGuarantor()==null){
                 textViewGuarantor.setVisibility(View.INVISIBLE);
-            }
+        }else{
+            this.textViewGuarantor.setText(getString(R.string.guarantor, this.event.getGuarantor()));
+        }
         this.textViewDescription.setText(getString(R.string.description, this.event.getDescription()));
         }
     }
@@ -127,9 +131,5 @@ public class EventActivity extends AppCompatActivity {
         Uri urif = Uri.parse("http://www.sspbrno.cz/"); // open feedback found url for feedbacka
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
-    }
-    public static String replaceChar(String str, String target){
-        String result = str.replaceAll(target, "\n");
-        return result;
     }
 }
