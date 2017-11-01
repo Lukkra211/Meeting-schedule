@@ -132,8 +132,4 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
     }
-    public static String replaceChar(String str, String target){
-        String result = str.replaceAll(target, "\n");
-        return result;
-    }
 }
