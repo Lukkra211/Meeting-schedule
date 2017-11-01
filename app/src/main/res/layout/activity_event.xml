@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="114dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -19,59 +19,75 @@
             android:layout_height="60dp"
             android:layout_margin="20dp"
             app:srcCompat="?android:attr/actionModeCopyDrawable" />
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="100dp"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/eventNameAndType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name_and_type"
-                android:textColor="@android:color/black" />
-            <TextView
-                android:id="@+id/eventTimeSpan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/time_span"
-                android:textColor="@android:color/black" />
             <TextView
                 android:id="@+id/eventPlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/place"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
+
             <TextView
-                android:id="@+id/eventGuarantor"
+                android:id="@+id/eventTimeSpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/guarantor"
-                android:textColor="@android:color/black" />
+                android:text="@string/time_span"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimary"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/my_color">
+
+        <TextView
+            android:id="@+id/eventNameAndType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:padding="15dp"
+            android:paddingLeft="15dp"
+            android:text="@string/name_and_type"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/eventGuarantor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/eventNameAndType"
+            android:paddingLeft="15dp"
+            android:text="@string/guarantor"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/eventDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/eventButtonsLayout"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/eventGuarantor"
+            android:lineSpacingExtra="8sp"
+            android:padding="15dp"
             android:text="@string/description"
             android:textColor="@android:color/black"
-            android:padding="10dp"
-            android:layout_above="@+id/eventButtonsLayout"
-            android:layout_alignParentTop="true"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:id="@+id/eventButtonsLayout"
@@ -80,27 +96,41 @@
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:weightSum="11"
-            android:padding="10dp" >
+            android:padding="10dp"
+            android:weightSum="11">
 
             <Button
                 android:id="@+id/eventButtonFeedback"
-                android:layout_height="wrap_content"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
+                android:background="@color/colorPrimary"
                 android:onClick="feedback"
-                android:text="@string/feedback" />
+                android:text="@string/feedback"
+                android:textColor="@android:color/background_light" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
             <Button
                 android:id="@+id/eventButtonMaterials"
-                android:layout_height="wrap_content"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
+                android:background="@color/colorPrimary"
                 android:onClick="feedback"
-                android:text="@string/materials" />
+                android:text="@string/materials"
+                android:textColor="@android:color/background_light" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary" />
     </RelativeLayout>
 </LinearLayout>
