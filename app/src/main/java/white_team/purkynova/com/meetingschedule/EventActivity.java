@@ -98,9 +98,4 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), OverviewActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
-    }
 }
