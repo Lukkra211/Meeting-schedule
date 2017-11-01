@@ -60,7 +60,7 @@ public class EventActivity extends AppCompatActivity {
             Log.e(TAG, "Activity didn't get id of the event.");
         } else {
             try {
-                int id = 19;//extras.getInt("id");
+                int id = 8;//extras.getInt("id");
                 this.event = this.eventModel.get(id);
 
                 if (this.event == null) {
@@ -79,13 +79,41 @@ public class EventActivity extends AppCompatActivity {
      * Initialize user interface
      */
     private void initUI() {
+        if(this.event.getType()=="food"){
+            Log.e(TAG, String.format("FOOD"));
+            this.textViewNameAndType.setText(getString(R.string.name_and_type,
+                    this.event.getName(),
+                    this.event.getType()));
+            this.textViewTime.setText(getString(R.string.time_span, this.event.getTimeSpan()));
+            this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
+            this.textViewGuarantor.setText(getString(R.string.guarantor,this.event.getGuarantor()));
+
+
+            String food1 = getString(R.string.description, this.event.getDescription());
+            String food= "1)"+food1;
+            String semicolon=";";
+            Log.e(TAG, String.format("1",food));
+            for (char c : food.toCharArray()) {
+                Log.e(TAG, String.format("2",c));
+                if (semicolon.contains(String.valueOf(c))) {
+                    Log.e(TAG, String.format("3",c));
+                }
+
+            }
+
+
+
+
+            this.textViewDescription.setText(food);
+        }else{
         this.textViewNameAndType.setText(getString(R.string.name_and_type,
                                                    this.event.getName(),
                                                    this.event.getType()));
         this.textViewTime.setText(getString(R.string.time_span, this.event.getTimeSpan()));
         this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
-        this.textViewGuarantor.setText(getString(R.string.guarantor, this.event.getGuarantor()));
+        this.textViewGuarantor.setText(getString(R.string.guarantor,this.event.getGuarantor()));
         this.textViewDescription.setText(getString(R.string.description, this.event.getDescription()));
+        }
     }
 
     public void materials(View view) {
@@ -98,4 +126,5 @@ public class EventActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
     }
+
 }

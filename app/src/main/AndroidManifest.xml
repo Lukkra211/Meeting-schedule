@@ -10,12 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".OverviewActivity"></activity>
-        <activity android:name=".EventActivity"></activity>
-        <activity android:name=".LogoActivity">
+        <activity android:name=".EventActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".LogoActivity">
+
         </activity>
     </application>
 
