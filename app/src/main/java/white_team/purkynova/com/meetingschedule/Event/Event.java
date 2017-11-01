@@ -18,18 +18,18 @@ public class Event {
     private final String name;
     private final String place;
     private final String description;
-    private final String lecturer;
+    private final String guarantor;
     private final Date since;
     private final Date till;
     private final int eventType;
 
 
     public Event(String name, String since, String till, String eventType,
-                 String description, String place, String lecturer) throws ParseException {
+                 String description, String place, String guarantor) throws ParseException {
         this.name = name;
         this.place = place;
         this.description = description;
-        this.lecturer = lecturer;
+        this.guarantor = guarantor;
         this.eventType = EventTypeHelper.stringToInt(eventType);
 
         this.since = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(since);
@@ -64,15 +64,14 @@ public class Event {
     public String getType() {
         return EventTypeHelper.intToString(this.eventType);
     }
-    //If event type is lecturer, then return it´s name
 
     /**
-     * Returns lecturer, the event type have to be lecture
+     * Returns guaranter
      *
      * @return lecturer's name
      */
-    public String getLecturer() {
-        return this.lecturer;
+    public String getGuarantor() {
+        return this.guarantor;
     }
 
     /**
@@ -85,11 +84,14 @@ public class Event {
     /**
      * Returns description of the event
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public String getName() {
-        return name;
-    }
+	/**
+	 * Return the name of event
+	 */
+	public String getName() {
+		return this.name;
+	}
 }

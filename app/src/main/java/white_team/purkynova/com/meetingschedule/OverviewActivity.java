@@ -2,11 +2,15 @@ package white_team.purkynova.com.meetingschedule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
+import white_team.purkynova.com.meetingschedule.Event.Event;
 import white_team.purkynova.com.meetingschedule.Model.EventModel;
 
 /**

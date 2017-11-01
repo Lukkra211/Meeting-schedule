@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Meeting Schedule</string>
-    <string name="time_start_end">Time(start+end)</string>
-    <string name="text_end">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text END</string>
-    <string name="pleace">Pleace</string>
-    <string name="feedback">FeedBack</string>
-    <string name="materilas">materilas</string>
-    <string name="todo">TODO</string>
-    <string name="lecturer">Lecturer</string>
-    <string name="islecturer">isLecturer?</string>
+
+    <string name="name_and_type">%s (%s)</string>
+    <string name="time_span">Time span: %s</string>
+    <string name="description">%s</string>
+    <string name="place">Place: %s</string>
+    <string name="guarantor">Guarantor: %s</string>
+
+    <string name="feedback">Feedback</string>
+    <string name="materials">Materials</string>
 
     <array name="spinnerType">
         <item>Day</item>
