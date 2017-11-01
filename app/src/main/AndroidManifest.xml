@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".OverviewActivity"></activity>
-        <activity android:name=".EventActivity"></activity>
+        <activity android:name=".EventActivity">
+
+        </activity>
         <activity android:name=".LogoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
