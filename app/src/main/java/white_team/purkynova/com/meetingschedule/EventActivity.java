@@ -16,6 +16,7 @@ import white_team.purkynova.com.meetingschedule.Model.EventModel;
 
 /**
  * @author Honza Rodák
+ * #HonyIsGod
  */
 public class EventActivity extends AppCompatActivity {
 
@@ -102,9 +103,7 @@ public class EventActivity extends AppCompatActivity {
             String str = Arrays.toString(foods);
             String cleanfood=str.replaceAll("^\\[|\\]$", "");
 
-
             this.textViewDescription.setText(cleanfood);
-
 
         }else{
         this.textViewNameAndType.setText(getString(R.string.name_and_type,
