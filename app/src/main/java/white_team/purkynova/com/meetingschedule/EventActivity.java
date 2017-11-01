@@ -86,8 +86,10 @@ public class EventActivity extends AppCompatActivity {
                     this.event.getType()));
             this.textViewTime.setText(getString(R.string.time_span, this.event.getTimeSpan()));
             this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
-            this.textViewGuarantor.setText(getString(R.string.guarantor,this.event.getGuarantor()));
 
+            if(this.event.getGuarantor()==null){
+                textViewGuarantor.setVisibility(View.INVISIBLE);
+            }
 
             String food1 = getString(R.string.description, this.event.getDescription());
             String[] parts = food1.split(";");
@@ -110,7 +112,9 @@ public class EventActivity extends AppCompatActivity {
                                                    this.event.getType()));
         this.textViewTime.setText(getString(R.string.time_span, this.event.getTimeSpan()));
         this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
-        this.textViewGuarantor.setText(getString(R.string.guarantor,this.event.getGuarantor()));
+        if(this.event.getGuarantor()==null){
+                textViewGuarantor.setVisibility(View.INVISIBLE);
+            }
         this.textViewDescription.setText(getString(R.string.description, this.event.getDescription()));
         }
     }
