@@ -107,8 +107,8 @@ public final class EventModel extends DbAdapter {
      */
     public ArrayList<Event> getEventsByDate(String date) {
         Cursor rows = this.db.rawQuery(
-                String.format("SELECT * from `%s` WHERE %s LIKE ?", TABLE_NAME, COL_SINCE),
-                new String[] {date}
+                String.format("SELECT * from `%s` WHERE `%s` LIKE ?", TABLE_NAME, COL_SINCE),
+                new String[] {date + "%"}
         );
 
         if (rows.moveToFirst()) {

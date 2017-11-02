@@ -9,6 +9,8 @@
 
     <string name="feedback">Feedback</string>
     <string name="materials">Materials</string>
+    <string name="name">%s</string>
+    <string name="list_time_span">%s</string>
 
     <array name="spinnerType">
         <item>Day</item>

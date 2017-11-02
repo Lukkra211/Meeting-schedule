@@ -70,4 +70,29 @@ public final class EventTypeHelper {
                 throw new RuntimeException(String.format("No tag with value %d exists.", tagValue));
         }
     }
+
+    public static String getDrawableNameByType(String type) {
+        switch (type) {
+            case TYPE_LECTURE:
+                return "ic_event_type_lecture_black";
+
+            case TYPE_PRESENTATION:
+                return "ic_event_type_presentation_black";
+
+            case TYPE_WORKSHOP:
+                return "ic_event_type_workshop_black";
+
+            case TYPE_WORK:
+                return "ic_event_type_work_black";
+
+            case TYPE_FOOD:
+                return "ic_event_type_food_black";
+
+            case TYPE_FREE_TIME:
+                return "ic_event_type_free_time_black";
+
+            default:
+                throw new RuntimeException("No tag resource for that type exists.");
+        }
+    }
 }
