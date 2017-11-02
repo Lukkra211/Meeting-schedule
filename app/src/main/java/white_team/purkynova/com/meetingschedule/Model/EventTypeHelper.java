@@ -48,7 +48,6 @@ public final class EventTypeHelper {
 
     public static String intToString(int tagValue) {
         switch (tagValue) {
-
             case TYPE_LECTURE_INDEX:
                 return TYPE_LECTURE;
 

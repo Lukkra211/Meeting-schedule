@@ -15,6 +15,7 @@ import white_team.purkynova.com.meetingschedule.Model.EventTypeHelper;
  * @author Lukáš Krajíček
  */
 public class Event {
+    private final int id;
     private final String name;
     private final String place;
     private final String description;
@@ -24,8 +25,9 @@ public class Event {
     private final int eventType;
 
 
-    public Event(String name, String since, String till, String eventType,
+    public Event(int id, String name, String since, String till, String eventType,
                  String description, String place, String guarantor) throws ParseException {
+        this.id = id;
         this.name = name;
         this.place = place;
         this.description = description;
@@ -94,4 +96,11 @@ public class Event {
 	public String getName() {
 		return this.name;
 	}
+
+    /**
+     * Returns id
+     */
+	public int getId() {
+	    return this.id;
+    }
 }
