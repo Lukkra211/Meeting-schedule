@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class EventActivity extends AppCompatActivity {
     private TextView textViewGuarantor;
     private TextView textViewDescription;
 
+    private Uri url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
         this.initParams();
+
+        checkType();
+        setButtonMaterials();
 
         if (!this.isFinishing()) {
             this.initUI();
@@ -62,7 +67,7 @@ public class EventActivity extends AppCompatActivity {
             Log.e(TAG, "Activity didn't get id of the event.");
         } else {
             try {
-                int id = extras.getInt("id");
+                int id =extras.getInt("id");
                 this.event = this.eventModel.get(id);
 
                 if (this.event == null) {
@@ -123,7 +128,7 @@ public class EventActivity extends AppCompatActivity {
     }
 
     public void materials(View view) {
-        Uri urim = Uri.parse("https://github.com/Honny1/Materials.git"); //open materials on github add alter
+        Uri urim = Uri.parse(url); //open materials on github add alter
         Intent intent = new Intent(Intent.ACTION_VIEW, urim);
         startActivity(intent);
     }
@@ -131,5 +136,22 @@ public class EventActivity extends AppCompatActivity {
         Uri urif = Uri.parse("http://www.sspbrno.cz/"); // open feedback found url for feedbacka
         Intent intent = new Intent(Intent.ACTION_VIEW, urif);
         startActivity(intent);
+    }
+    public  void checkType(){
+        if(this.event.getType()!="lecture"){
+        /*Button b = (Button)findViewById(R.id.eventButtonMaterials);
+        b.setVisibility(View.INVISIBLE);*/
+        Button b1 = (Button)findViewById(R.id.eventButtonFeedback);
+        b1.setVisibility(View.INVISIBLE);
+        }
+    }
+    public void setButtonMaterials(){
+       /** if(this.event.getMaterialLink==null){
+            Button b = (Button)findViewById(R.id.eventButtonMaterials);
+            b.setVisibility(View.INVISIBLE);
+            //přidat kouzlo co vycentruje button feedback
+        }else{
+            url=this.event.getMaterialLink;
+        }**/
     }
 }
