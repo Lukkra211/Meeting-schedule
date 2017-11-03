@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -53,10 +54,10 @@ public class OverviewActivity extends ListActivity implements AdapterView.OnItem
         this.listView = getListView();
         this.listView.setOnItemClickListener(new ListViewOnClickListener());
 
-        //spinner = (Spinner) findViewById(0);
-        //ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_item);
-        //spinner.setAdapter(adapter);
-        //spinner.setOnItemSelectedListener(this);
+        spinner = (Spinner) findViewById(R.id.day_spinner);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
