@@ -146,12 +146,11 @@ public class EventActivity extends AppCompatActivity {
         }
     }
     public void setButtonMaterials(){
-       /** if(this.event.getMaterialLink==null){
+       if(this.event.getMaterialLink==null){
             Button b = (Button)findViewById(R.id.eventButtonMaterials);
             b.setVisibility(View.INVISIBLE);
-            //přidat kouzlo co vycentruje button feedback
         }else{
             url=this.event.getMaterialLink;
-        }*/
+        }
     }
 }
