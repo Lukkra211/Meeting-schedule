@@ -27,6 +27,7 @@ public final class EventModel extends DbAdapter {
     static final String COL_TILL = "till";
     static final String COL_INFO = "text_info";
     static final String COL_LECTURER = "lecturer";
+    static final String COL_MATERIAL = "link";
 
     // String to identify this class in log
     static final String TAG = "EventModel";
@@ -39,9 +40,10 @@ public final class EventModel extends DbAdapter {
             "`%s` TEXT NOT NULL, " +
             "`%s` TEXT NOT NULL, " +
             "`%s` TEXT NOT NULL, " +
+            "`%s` TEXT DEFAULT NULL, " +
             "`%s` TEXT DEFAULT NULL);",
             TABLE_NAME, COL_ID, COL_TYPE, COL_PLACE, COL_NAME,
-            COL_SINCE, COL_TILL, COL_INFO, COL_LECTURER
+            COL_SINCE, COL_TILL, COL_INFO, COL_LECTURER, COL_MATERIAL
     );
 
     public EventModel(Context context) {
@@ -143,6 +145,7 @@ public final class EventModel extends DbAdapter {
         int index_place = cursor.getColumnIndex(EventModel.COL_PLACE);
         int index_info = cursor.getColumnIndex(EventModel.COL_INFO);
         int index_lecturer = cursor.getColumnIndex(EventModel.COL_LECTURER);
+        int index_material = cursor.getColumnIndex(EventModel.COL_LECTURER);
 
         return new Event(
                 cursor.getInt(index_id),
@@ -152,7 +155,8 @@ public final class EventModel extends DbAdapter {
                 cursor.getString(index_type),
                 cursor.getString(index_info),
                 cursor.getString(index_place),
-                cursor.getString(index_lecturer)
+                cursor.getString(index_lecturer),
+                cursor.getString(index_material)
         );
     }
 }
