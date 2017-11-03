@@ -32,7 +32,7 @@ public class EventActivity extends AppCompatActivity {
     private TextView textViewGuarantor;
     private TextView textViewDescription;
 
-    private Uri url;
+    private String url/**="www.google.com"*/;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +152,6 @@ public class EventActivity extends AppCompatActivity {
             //přidat kouzlo co vycentruje button feedback
         }else{
             url=this.event.getMaterialLink;
-        }**/
+        }*/
     }
 }
