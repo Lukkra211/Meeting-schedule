@@ -32,6 +32,7 @@
                 android:id="@+id/day_spinner"
                 android:layout_width="86sp"
                 android:layout_height="match_parent"
+                android:textColor="@color/overviewToolbarAppText"
                 android:layout_weight="2" />
 
             <!-- Kontent toolbaru pod touto řádkou; kouknout se na vlastnost layout_weight -->

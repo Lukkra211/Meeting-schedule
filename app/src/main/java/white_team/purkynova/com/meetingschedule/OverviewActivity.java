@@ -56,6 +56,7 @@ public class OverviewActivity extends ListActivity implements AdapterView.OnItem
 
         spinner = (Spinner) findViewById(R.id.day_spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -86,26 +87,32 @@ public class OverviewActivity extends ListActivity implements AdapterView.OnItem
         switch (position) {
             case 1:
                 this.selfIntent.putExtra("date", "2017-11-06");
+                startActivity(selfIntent);
                 break;
 
             case 2:
                 this.selfIntent.putExtra("date", "2017-11-07");
+                startActivity(selfIntent);
                 break;
 
             case 3:
                 this.selfIntent.putExtra("date", "2017-11-08");
+                startActivity(selfIntent);
                 break;
 
             case 4:
                 this.selfIntent.putExtra("date", "2017-11-09");
+                startActivity(selfIntent);
                 break;
 
             case 5:
                 this.selfIntent.putExtra("date", "2017-11-10");
+                startActivity(selfIntent);
                 break;
 
             case 6:
                 this.selfIntent.putExtra("date", "2017-11-11");
+                startActivity(selfIntent);
                 break;
         }
     }
