@@ -144,7 +144,7 @@ public final class EventModel extends DbAdapter {
         int index_place = cursor.getColumnIndex(EventModel.COL_PLACE);
         int index_info = cursor.getColumnIndex(EventModel.COL_INFO);
         int index_lecturer = cursor.getColumnIndex(EventModel.COL_LECTURER);
-        int index_material = cursor.getColumnIndex(EventModel.COL_LECTURER);
+        int index_material = cursor.getColumnIndex(EventModel.COL_MATERIAL);
 
         return new Event(
                 cursor.getInt(index_id),

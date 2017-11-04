@@ -119,7 +119,6 @@ public class OverviewActivity extends ListActivity {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.w("A", "run");
             if (!initialized) {
                 initialized = true;
                 spinner.setSelection(this.dateToPosition(date));
