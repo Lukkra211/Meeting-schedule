@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Meeting Schedule</string>
+    <string name="app_name_1">Meeting</string>
+    <string name="app_name_2">Schedule</string>
 
     <string name="name_and_type">%s (%s)</string>
     <string name="time_span">Time span: %s</string>
