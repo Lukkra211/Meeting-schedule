@@ -87,7 +87,7 @@ public class OverviewActivity extends ListActivity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new SpinnerListener());
-        
+
         listView.setOnItemClickListener(new ListViewListener());
         EventAdapter eventAdapter = new EventAdapter(
                 this,
@@ -150,14 +150,11 @@ public class OverviewActivity extends ListActivity {
                 case 4:
                     selfIntent.putExtra("date", "2017-11-10");
                     break;
-
-                case 5:
-                    selfIntent.putExtra("date", "2017-11-11");
-                    break;
             }
 
             startActivity(selfIntent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
         }
 
         private int dateToPosition(String date) {
@@ -176,9 +173,6 @@ public class OverviewActivity extends ListActivity {
 
                 case "2017-11-10":
                     return 4;
-
-                case "2017-11-11":
-                    return 5;
 
                 default:
                     return 0;

@@ -35,7 +35,7 @@ public class LogoActivity extends AppCompatActivity {
     /** Date of the day when meeting start */
     private final String FIRST_DAY = "2017-11-06";
     /** Date of the day when meeting end */
-    private final String LAST_DAY = "2017-11-11";
+    private final String LAST_DAY = "2017-11-10";
 
     @SuppressLint("SimpleDateFormat")
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
