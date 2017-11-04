@@ -15,7 +15,6 @@
     <string name="list_time_span">%s</string>
 
     <array name="spinnerType">
-        <item></item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
