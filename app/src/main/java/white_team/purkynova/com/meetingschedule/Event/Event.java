@@ -1,5 +1,7 @@
 package white_team.purkynova.com.meetingschedule.Event;
 
+import android.content.Context;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,6 +17,8 @@ import white_team.purkynova.com.meetingschedule.Model.EventTypeHelper;
  * @author Lukáš Krajíček
  */
 public class Event {
+    private final Context context;
+
     private final int id;
     private final String name;
     private final String place;
@@ -26,7 +30,7 @@ public class Event {
     private final int eventType;
 
 
-    public Event(int id, String name, String since, String till, String eventType,
+    public Event(Context context, int id, String name, String since, String till, String eventType,
                  String description, String place, String guarantor, String materialLink) throws ParseException {
         this.id = id;
         this.name = name;
@@ -38,6 +42,8 @@ public class Event {
 
         this.since = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(since);
         this.till = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(till);
+
+        this.context = context;
     }
 
     /**
@@ -55,7 +61,7 @@ public class Event {
      * @return time span of the event in String
      */
     public String getTimeSpan() {
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        DateFormat dateFormat = android.text.format.DateFormat.getTimeFormat(context);
 
         return dateFormat.format(this.since) + " - " + dateFormat.format(this.till);
     }

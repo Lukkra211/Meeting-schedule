@@ -18,19 +18,24 @@ abstract class DbAdapter {
     private final String CHILD_TABLE_NAME;
     private final String CHILD_COL_ID;
 
+    private final String SEARCH_QUERY = "SELECT * FROM `%s` WHERE %s = ?";
+
     /** @brief object that calls callbacks on specifics event, see detailed object documentation */
     private DatabaseHelper databaseHelper;
+
 
     /** @brief db object that is used to manipulating data in database */
     protected SQLiteDatabase db;
 
-    private final String SEARCH_QUERY = "SELECT * FROM `%s` WHERE %s = ?";
+    protected final Context context;
 
 
     DbAdapter(Context context) {
         this.CHILD_TABLE_NAME = getTableName();
         this.CHILD_COL_ID = getIdColumnName();
         this.databaseHelper = new DatabaseHelper(context);
+
+        this.context = context;
     }
 
 
