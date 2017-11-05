@@ -25,7 +25,7 @@ import white_team.purkynova.com.meetingschedule.Model.EventTypeHelper;
  * @author Honza Rodák
  * @author Lukáš Krajíček
  */
-public class EventActivity extends AppCompatActivity implements View.OnClickListener {
+public class EventActivity extends AppCompatActivity {
 
     private final String TAG = "EventActivity";
     private final String FEEDBACK_HTTP = "http://projects.sspbrno.cz/feedback/%d";
@@ -38,7 +38,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     private TextView textViewPlace;
     private TextView textViewGuarantor;
     private TextView textViewDescription;
-    private Button buttonMaterials;
     private Button buttonFeedback;
     private ImageView typeImage;
 
@@ -68,12 +67,10 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         this.textViewPlace = (TextView) findViewById(R.id.eventPlace);
         this.textViewGuarantor = (TextView) findViewById(R.id.eventGuarantor);
         this.textViewDescription = (TextView) findViewById(R.id.eventDescription);
-        this.buttonMaterials = (Button) findViewById(R.id.eventButtonMaterials);
         this.buttonFeedback = (Button) findViewById(R.id.eventButtonFeedback);
         this.typeImage = (ImageView) findViewById(R.id.imageView);
 
-        this.buttonMaterials.setOnClickListener(this);
-        this.buttonFeedback.setOnClickListener(this);
+        this.buttonFeedback.setOnClickListener(new FeedbackListener());
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -125,11 +122,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         if (!event.isLecture()) {
             buttonFeedback.setVisibility(View.GONE);
         }
-        if (event.getMaterialLink() == null) {
-            buttonMaterials.setVisibility(View.GONE);
-        } else {
-            Log.w("AAA", event.getMaterialLink().toString());
-        }
     }
 
     @Override
@@ -138,22 +130,19 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(R.anim.empty, android.R.anim.slide_out_right);
     }
 
-    @Override
-    public void onClick(View v) {
-        String uri;
-        switch (v.getId()) {
-            case R.id.eventButtonMaterials:
-                uri = event.getMaterialLink();
-                break;
 
-            case R.id.eventButtonFeedback:
-                uri = String.format(FEEDBACK_HTTP, event.getId());
-                break;
+    class FeedbackListener implements View.OnClickListener {
 
-                default:
-                    return;
+        private int extractTopicIdFromName(String title) {
+            return Character.getNumericValue(title.charAt(6));
         }
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        startActivity(intent);
+
+        @Override
+        public void onClick(View v) {
+            String uri = String.format(FEEDBACK_HTTP, extractTopicIdFromName(event.getName()));
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            startActivity(intent);
+        }
     }
 }

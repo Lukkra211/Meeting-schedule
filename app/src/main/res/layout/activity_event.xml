@@ -80,7 +80,7 @@
             android:id="@+id/eventDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/eventButtonsLayout"
+            android:layout_above="@+id/eventButtonFeedback"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/eventGuarantor"
             android:lineSpacingExtra="8sp"
@@ -89,37 +89,19 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
-
-        <LinearLayout
-            android:id="@+id/eventButtonsLayout"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/eventButtonFeedback"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:background="@color/colorPrimary"
+            android:text="@string/feedback"
+            android:textColor="@android:color/background_light"
             android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:weightSum="10">
-
-            <Button
-                android:id="@+id/eventButtonFeedback"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/colorPrimary"
-                android:text="@string/feedback"
-                android:textColor="@android:color/background_light"
-                android:layout_margin="15dp" />
-
-            <Button
-                android:id="@+id/eventButtonMaterials"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:background="@color/colorPrimary"
-                android:text="@string/materials"
-                android:textColor="@android:color/background_light"
-                android:layout_margin="15dp" />
-        </LinearLayout>
+            android:layout_margin="15dp"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"/>
 
         <View
             android:id="@+id/view"

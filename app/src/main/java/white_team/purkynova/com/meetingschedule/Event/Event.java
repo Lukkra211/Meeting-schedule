@@ -24,21 +24,19 @@ public class Event {
     private final String place;
     private final String description;
     private final String guarantor;
-    private final String materialLink;
     private final Date since;
     private final Date till;
     private final int eventType;
 
 
     public Event(Context context, int id, String name, String since, String till, String eventType,
-                 String description, String place, String guarantor, String materialLink) throws ParseException {
+                 String description, String place, String guarantor) throws ParseException {
         this.id = id;
         this.name = name;
         this.place = place;
         this.description = description;
         this.guarantor = guarantor;
         this.eventType = EventTypeHelper.stringToInt(eventType);
-        this.materialLink = materialLink;
 
         this.since = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(since);
         this.till = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(till);
@@ -110,9 +108,5 @@ public class Event {
      */
 	public int getId() {
 	    return this.id;
-    }
-
-    public String getMaterialLink() {
-	    return this.materialLink;
     }
 }
