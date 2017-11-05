@@ -12,12 +12,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import white_team.purkynova.com.meetingschedule.Model.EventTypeHelper;
-import white_team.purkynova.com.meetingschedule.OverviewActivity;
 import white_team.purkynova.com.meetingschedule.R;
 
 
 /**
+ * Custom array adapter that allow to fill multiple values to one line and add custom image to it
  *
+ * @author Lukáš Krajíček
  */
 public class EventAdapter extends ArrayAdapter {
     private ArrayList<Event> eventList;
@@ -53,10 +54,7 @@ public class EventAdapter extends ArrayAdapter {
                     "drawable",
                     getContext().getPackageName()
             ));
-
-
         }
-
         return v;
     }
 }

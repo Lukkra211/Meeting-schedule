@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +20,10 @@ import white_team.purkynova.com.meetingschedule.Model.EventTypeHelper;
 
 
 /**
+ * Activity showing events details
+ *
  * @author Honza Rodák
- * #HonyIsGod
+ * @author Lukáš Krajíček
  */
 public class EventActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +40,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     private TextView textViewDescription;
     private Button buttonMaterials;
     private Button buttonFeedback;
+    private ImageView typeImage;
 
 
     @Override
@@ -66,6 +70,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         this.textViewDescription = (TextView) findViewById(R.id.eventDescription);
         this.buttonMaterials = (Button) findViewById(R.id.eventButtonMaterials);
         this.buttonFeedback = (Button) findViewById(R.id.eventButtonFeedback);
+        this.typeImage = (ImageView) findViewById(R.id.imageView);
 
         this.buttonMaterials.setOnClickListener(this);
         this.buttonFeedback.setOnClickListener(this);
@@ -91,6 +96,13 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                                                    this.event.getType()));
         this.textViewTime.setText(getString(R.string.time_span, this.event.getTimeSpan()));
         this.textViewPlace.setText(getString(R.string.place, this.event.getPlace()));
+
+        int type = EventTypeHelper.stringToInt(event.getType());
+        typeImage.setImageResource(getResources().getIdentifier(
+                EventTypeHelper.getDrawableNameByType(event.getType()),
+                "drawable",
+                getPackageName()
+        ));
 
         if (this.event.getGuarantor() == null) {
             textViewGuarantor.setVisibility(View.GONE);

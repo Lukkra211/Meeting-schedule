@@ -106,7 +106,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/colorPrimary"
-                android:onClick="materials"
                 android:text="@string/feedback"
                 android:textColor="@android:color/background_light"
                 android:layout_margin="15dp" />
@@ -117,7 +116,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:background="@color/colorPrimary"
-                android:onClick="feedback"
                 android:text="@string/materials"
                 android:textColor="@android:color/background_light"
                 android:layout_margin="15dp" />

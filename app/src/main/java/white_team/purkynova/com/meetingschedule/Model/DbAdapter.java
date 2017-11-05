@@ -122,8 +122,8 @@ abstract class DbAdapter {
         }
 
         /**
-         * This method is triggered when database hasn't been created yet. The method should create all
-         * necessary tables and insert vital information in it.
+         * This method is triggered when database hasn't been created yet. The method should create
+         * all necessary tables and insert vital information in it.
          *
          * @param db the database to initialize
          */
@@ -135,8 +135,8 @@ abstract class DbAdapter {
         }
 
         /**
-         * This method is triggered when app is using new database model but device has the old one. The
-         * method should do changes that upgrade old database model to the new one.
+         * This method is triggered when app is using new database model but device has the old one.
+         * The method should do changes that upgrade old database model to the new one.
          */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

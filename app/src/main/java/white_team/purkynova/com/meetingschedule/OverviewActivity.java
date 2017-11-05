@@ -21,7 +21,6 @@ import white_team.purkynova.com.meetingschedule.Model.EventModel;
 /**
  * @author Zdeňka Škrdlová
  * @author Lukáš Krajíček
- * @author Honza Rodák
  */
 public class OverviewActivity extends ListActivity {
 
@@ -84,7 +83,8 @@ public class OverviewActivity extends ListActivity {
     }
 
     private void initUI() {
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new SpinnerListener());
 
