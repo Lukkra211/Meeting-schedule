@@ -18,19 +18,24 @@ abstract class DbAdapter {
     private final String CHILD_TABLE_NAME;
     private final String CHILD_COL_ID;
 
+    private final String SEARCH_QUERY = "SELECT * FROM `%s` WHERE %s = ?";
+
     /** @brief object that calls callbacks on specifics event, see detailed object documentation */
     private DatabaseHelper databaseHelper;
+
 
     /** @brief db object that is used to manipulating data in database */
     protected SQLiteDatabase db;
 
-    private final String SEARCH_QUERY = "SELECT * FROM `%s` WHERE %s = ?";
+    protected final Context context;
 
 
     DbAdapter(Context context) {
         this.CHILD_TABLE_NAME = getTableName();
         this.CHILD_COL_ID = getIdColumnName();
         this.databaseHelper = new DatabaseHelper(context);
+
+        this.context = context;
     }
 
 
@@ -122,8 +127,8 @@ abstract class DbAdapter {
         }
 
         /**
-         * This method is triggered when database hasn't been created yet. The method should create all
-         * necessary tables and insert vital information in it.
+         * This method is triggered when database hasn't been created yet. The method should create
+         * all necessary tables and insert vital information in it.
          *
          * @param db the database to initialize
          */
@@ -135,8 +140,8 @@ abstract class DbAdapter {
         }
 
         /**
-         * This method is triggered when app is using new database model but device has the old one. The
-         * method should do changes that upgrade old database model to the new one.
+         * This method is triggered when app is using new database model but device has the old one.
+         * The method should do changes that upgrade old database model to the new one.
          */
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -2,6 +2,7 @@ package white_team.purkynova.com.meetingschedule.Model;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -85,7 +86,6 @@ public final class EventModel extends DbAdapter {
      *
      * @param id id of an event
      * @return {@link Event}
-     * @throws ParseException
      */
     public Event get(int id) {
         Cursor rows = super._get(id);
@@ -113,20 +113,19 @@ public final class EventModel extends DbAdapter {
                 new String[] {date + "%"}
         );
 
+        ArrayList<Event> eventList = new ArrayList<>();
         if (rows.moveToFirst()) {
-            ArrayList<Event> eventList = new ArrayList<>();
             do {
                 try {
                     eventList.add(this._createEventFromCursor(rows));
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    Log.w(TAG, "Error when parsing Cursor. Cursor: " + rows.toString());
                 }
             } while (rows.moveToNext());
 
-            return eventList;
-        } else {
-            return null;
+
         }
+        return eventList;
     }
 
     /**
@@ -145,9 +144,9 @@ public final class EventModel extends DbAdapter {
         int index_place = cursor.getColumnIndex(EventModel.COL_PLACE);
         int index_info = cursor.getColumnIndex(EventModel.COL_INFO);
         int index_lecturer = cursor.getColumnIndex(EventModel.COL_LECTURER);
-        int index_material = cursor.getColumnIndex(EventModel.COL_LECTURER);
 
         return new Event(
+                this.context,
                 cursor.getInt(index_id),
                 cursor.getString(index_name),
                 cursor.getString(index_since),
@@ -155,8 +154,7 @@ public final class EventModel extends DbAdapter {
                 cursor.getString(index_type),
                 cursor.getString(index_info),
                 cursor.getString(index_place),
-                cursor.getString(index_lecturer),
-                cursor.getString(index_material)
+                cursor.getString(index_lecturer)
         );
     }
 }

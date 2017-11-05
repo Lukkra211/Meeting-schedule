@@ -74,22 +74,22 @@ public final class EventTypeHelper {
     public static String getDrawableNameByType(String type) {
         switch (type) {
             case TYPE_LECTURE:
-                return "ic_event_type_lecture_black";
+                return "ic_event_type_lecture";
 
             case TYPE_PRESENTATION:
-                return "ic_event_type_presentation_black";
+                return "ic_event_type_presentation";
 
             case TYPE_WORKSHOP:
-                return "ic_event_type_workshop_black";
+                return "ic_event_type_workshop";
 
             case TYPE_WORK:
-                return "ic_event_type_work_black";
+                return "ic_event_type_project_work";
 
             case TYPE_FOOD:
-                return "ic_event_type_food_black";
+                return "ic_event_type_food";
 
             case TYPE_FREE_TIME:
-                return "ic_event_type_free_time_black";
+                return "ic_event_type_free_time";
 
             default:
                 throw new RuntimeException("No tag resource for that type exists.");

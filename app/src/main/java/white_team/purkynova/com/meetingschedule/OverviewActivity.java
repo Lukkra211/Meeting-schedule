@@ -17,13 +17,16 @@ import white_team.purkynova.com.meetingschedule.Event.Event;
 import white_team.purkynova.com.meetingschedule.Event.EventAdapter;
 import white_team.purkynova.com.meetingschedule.Model.EventModel;
 
+
 /**
  * @author Zdeňka Škrdlová
  * @author Lukáš Krajíček
  */
-public class OverviewActivity extends ListActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class OverviewActivity extends ListActivity {
 
     private final String TAG = "OverviewActivity";
+
+    private String date;
 
     private Intent eventIntent;
     private Intent selfIntent;
@@ -34,46 +37,58 @@ public class OverviewActivity extends ListActivity implements AdapterView.OnItem
     private EventModel eventModel;
     private ArrayList<Event> eventList = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        initParams();
-        if (!isFinishing()) {
+        try {
+            initParams();
             initUI();
+        } catch (IllegalStateException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e(TAG, String.format("%s", e.getMessage()));
+            finish();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     private void initParams() {
         this.eventModel = new EventModel(this);
-
         this.eventIntent = new Intent(this, EventActivity.class);
         this.selfIntent = new Intent(this, this.getClass());
 
         this.listView = getListView();
-        this.listView.setOnItemClickListener(new ListViewOnClickListener());
-
-        spinner = (Spinner) findViewById(R.id.day_spinner);
-        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, android.R.layout.simple_spinner_item);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        this.spinner = (Spinner) findViewById(R.id.day_spinner);
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
-            Log.e(TAG, "Activity didn't get id of the event.");
-            this.finish();
-        } else {
-            eventList = eventModel.getEventsByDate(extras.getString("date"));
+            throw new IllegalStateException("No parameter given to the activity.");
+        }
 
-            if (this.eventList.size() == 0) {
-                Toast.makeText(this, "No events found", Toast.LENGTH_SHORT).show();
-            }
+        this.date = extras.getString("date");
+        if (this.date == null) {
+            throw new IllegalStateException("No parameter named 'date' given.");
+        }
+
+        eventList = eventModel.getEventsByDate(this.date);
+        if (this.eventList.size() == 0) {
+            throw new IllegalStateException(String.format("No events found for the given day. %s given", this.date));
         }
     }
 
     private void initUI() {
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.spinnerType, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new SpinnerListener());
+
+        listView.setOnItemClickListener(new ListViewListener());
         EventAdapter eventAdapter = new EventAdapter(
                 this,
                 R.layout.overview_activity_list_row,
@@ -82,56 +97,88 @@ public class OverviewActivity extends ListActivity implements AdapterView.OnItem
         setListAdapter(eventAdapter);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position) {
-            case 1:
-                this.selfIntent.putExtra("date", "2017-11-06");
-                startActivity(selfIntent);
-                break;
-
-            case 2:
-                this.selfIntent.putExtra("date", "2017-11-07");
-                startActivity(selfIntent);
-                break;
-
-            case 3:
-                this.selfIntent.putExtra("date", "2017-11-08");
-                startActivity(selfIntent);
-                break;
-
-            case 4:
-                this.selfIntent.putExtra("date", "2017-11-09");
-                startActivity(selfIntent);
-                break;
-
-            case 5:
-                this.selfIntent.putExtra("date", "2017-11-10");
-                startActivity(selfIntent);
-                break;
-
-            case 6:
-                this.selfIntent.putExtra("date", "2017-11-11");
-                startActivity(selfIntent);
-                break;
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {}
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {}
-
     /**
      * Implementation of OnItemClickListener for ListView
      */
-    private class ListViewOnClickListener implements AdapterView.OnItemClickListener {
+    private class ListViewListener implements AdapterView.OnItemClickListener {
+
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id)  {
-            Log.w(TAG, String.valueOf(position));
-            Log.w(TAG, String.valueOf(eventList));
             eventIntent.putExtra("id", eventList.get(position).getId());
             startActivity(eventIntent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.empty);
         }
+    };
+
+    /**
+     * Implementation of OnItemSelectedListener for Spinner
+     */
+    private class SpinnerListener implements AdapterView.OnItemSelectedListener {
+
+        private boolean initialized = false;
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if (!initialized) {
+                initialized = true;
+                spinner.setSelection(this.dateToPosition(date));
+                return;
+            }
+
+            if (position == this.dateToPosition(date)) {
+                return;
+            }
+
+            switch (position) {
+                case 0:
+                    selfIntent.putExtra("date", "2017-11-06");
+                    break;
+
+                case 1:
+                    selfIntent.putExtra("date", "2017-11-07");
+                    break;
+
+                case 2:
+                    selfIntent.putExtra("date", "2017-11-08");
+                    break;
+
+                case 3:
+                    selfIntent.putExtra("date", "2017-11-09");
+                    break;
+
+                case 4:
+                    selfIntent.putExtra("date", "2017-11-10");
+                    break;
+            }
+
+            startActivity(selfIntent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
+        }
+
+        private int dateToPosition(String date) {
+            switch (date) {
+                case "2017-11-06":
+                    return 0;
+
+                case "2017-11-07":
+                    return 1;
+
+                case "2017-11-08":
+                    return 2;
+
+                case "2017-11-09":
+                    return 3;
+
+                case "2017-11-10":
+                    return 4;
+
+                default:
+                    return 0;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {}
     }
 }
